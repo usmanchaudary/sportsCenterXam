@@ -34,6 +34,24 @@ namespace sportsCenterXam.Views
 
         private void Save_Clicked(object sender, EventArgs e)
         {
+            //if user is not selected then show alert
+            if (users.SelectedItem == null)
+            {
+                DisplayAlert("Error", "Please select user", "OK");
+                return;
+            }
+            //if date is not selected then show alert
+            if (visitDate.Date == null)
+            {
+                DisplayAlert("Error", "Please select date", "OK");
+                return;
+            }
+            //if activity is not selected then show alert
+            if (activities.SelectedItem == null)
+            {
+                DisplayAlert("Error", "Please select activity", "OK");
+                return;
+            }
             var visitRepository = new VisitService();
             var visit = new Visit
             {
