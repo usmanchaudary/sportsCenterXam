@@ -22,7 +22,7 @@ namespace sportsCenterXam.Views
         public ActivityPage()
         {
             InitializeComponent();
-            users.ItemsSource = new List<User>();
+            activities.ItemsSource = new List<User>();
             users.ItemsSource = GetUsers().Result.ToList();
         }
         private async Task<List<User>> GetUsers()

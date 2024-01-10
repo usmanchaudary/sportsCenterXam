@@ -7,16 +7,12 @@
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
 
-        <!--create a form for input for the fields in visit class which are visit date, activityEnums, and usersList-->
-        <StackLayout>
-            
             <Label Text="Visit Date" />
             <DatePicker x:Name="visitDate" />
             
             <Label Text="Activity" />
-            <Picker x:Name="activities" Title="Activity" ItemsSource="{x:Static local:PickerPage.activityEnums}" />
+            <Picker x:Name="activities" Title="Activity" />
             
             <Label Text="Users" />
             <Picker x:Name="users" Title="Select User" />
