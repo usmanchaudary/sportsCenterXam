@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sportsCenterXam.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,6 +14,22 @@ namespace sportsCenterXam
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void Register_Clicked(object sender, EventArgs e)
+        {
+            //navigate to register page
+            Navigation.PushModalAsync(new RegisterUser());
+        }
+
+        private void CreateActivity_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ShowUsersBtn_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

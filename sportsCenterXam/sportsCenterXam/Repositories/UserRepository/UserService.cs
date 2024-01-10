@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualBasic;
 using sportCenter.ApplicationConstants;
 using sportCenter.Models;
+using sportsCenter.Models;
+using sportsCenterXam.Repositories.SharedRepository;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -10,18 +12,8 @@ using System.Threading.Tasks;
 
 namespace sportCenter.Repositories.UserRepository
 {
-    public class UserService
+    public class UserService : ContextInitializer
     {
-        //intialize the database
-        private SQLiteConnection Database;
-        public async Task Init()
-        {
-            if (Database != null)
-                return;
-
-            Database = new SQLiteConnection(DatabaseConstants.DatabasePath, DatabaseConstants.Flags);
-            var result = Database.CreateTable<User>();
-        }
         //GetUsersAsync
         public async Task<List<User>> GetUsersAsync()
         {

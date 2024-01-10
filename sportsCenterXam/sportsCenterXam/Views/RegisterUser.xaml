@@ -3,10 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="sportsCenterXam.Views.RegisterUser">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="20">
+            <Label Text="Registration of New Users" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+            <StackLayout Spacing="10">
+                <Label Text="First Name" FontSize="Medium" />
+                <Entry x:Name="FirstName" Placeholder="Enter your First Name" />
+            </StackLayout>
+
+            <StackLayout Spacing="10">
+                <Label Text="Last Name" FontSize="Medium" />
+                <Entry x:Name="LastName" Placeholder="Enter your Last Name" />
+            </StackLayout>
+
+            <StackLayout Spacing="10">
+                <Label Text="Date of Birth" FontSize="Medium" />
+                <DatePicker x:Name="dateofBirth" />
+            </StackLayout>
+
+            <StackLayout Spacing="10">
+                <Label Text="Gender" FontSize="Medium" />
+                <Picker x:Name="userGender">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Male</x:String>
+                            <x:String>Female</x:String>
+                            <x:String>Unknown</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label Text="Is Member" FontSize="Medium" VerticalOptions="Center"/>
+                <Switch x:Name="isMember" IsToggled="false" />
+            </StackLayout>
+
+            <!-- Add other input fields like Date of Birth, Gender, etc. -->
+
+            <Button Text="Register" x:Name="Register" Clicked="RegisterUser_Clicked" BackgroundColor="#2196F3" TextColor="White"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
