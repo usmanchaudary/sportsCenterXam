@@ -41,7 +41,7 @@
 
             <!-- Add other input fields like Date of Birth, Gender, etc. -->
 
-            <Button Text="Register" x:Name="Register" Clicked="RegisterUser_Clicked" BackgroundColor="#2196F3" TextColor="White"/>
+            <Button Text="Register" x:Name="RegisterUserBtn" Clicked="RegisterUser_Clicked" BackgroundColor="#2196F3" TextColor="White"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

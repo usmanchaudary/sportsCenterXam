@@ -16,5 +16,10 @@ namespace sportsCenterXam.Views
         {
             InitializeComponent();
         }
+
+        private void RegisterUser_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
