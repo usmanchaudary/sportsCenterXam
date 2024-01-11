@@ -7,6 +7,40 @@
             <Label Text="All Users"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+
+            <ListView ItemsSource="{Binding users}" x:Name="usersList" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding FirstName}" Grid.Column="0" />
+                                <Label Text="{Binding LastName}" Grid.Column="1" />
+
+                                <!-- Detail Icon Column -->
+                                <Image Source="details.svg" Grid.Column="2">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding DetailCommand}" CommandParameter="{Binding .}"  />
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <!-- Delete Icon Column -->
+                                <Image Source="delete.svg" Grid.Column="3">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding DeleteCommand}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

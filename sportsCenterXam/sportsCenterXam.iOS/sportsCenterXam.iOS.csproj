@@ -133,4 +133,10 @@
       <Name>sportsCenterXam</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\details.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\delete.svg" />
+  </ItemGroup>
 </Project>

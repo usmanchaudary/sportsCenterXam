@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,6 +17,21 @@ namespace sportsCenterXam.Views
     {
         //create an observable collection of users
         ObservableCollection<User> users = new ObservableCollection<User>();
+        public ICommand DetailsCommand => new Command<User>(OnDetails);
+        public ICommand DeleteCommand => new Command<User>(OnDelete);
+
+        private async void OnDelete(User user)
+        {
+            var userService = new UserService();
+            await userService.DeleteUserAsync(user);
+            usersList.ItemsSource = await GetUsers();
+        }
+
+        private void OnDetails(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         public AllUsers()
         {
             InitializeComponent();
@@ -30,6 +45,7 @@ namespace sportsCenterXam.Views
                         users.Add(user);
                     }
                 });
+                usersList.ItemsSource = users;
             });
         }
         private async Task<List<User>> GetUsers()
