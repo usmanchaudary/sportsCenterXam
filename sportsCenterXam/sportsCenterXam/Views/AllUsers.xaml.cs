@@ -1,5 +1,6 @@
 ﻿using sportCenter.Models;
 using sportCenter.Repositories.UserRepository;
+using sportsCenterXam.Repositories.VisitiRepository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,7 +30,10 @@ namespace sportsCenterXam.Views
 
         private void OnDetails(User user)
         {
-            throw new NotImplementedException();
+            App.UserViewModel.SelectedUser = user;
+            var visitService = new VisitService();
+            App.UserViewModel.Visits = visitService.GetVisitsByUserId(user.UserCode);
+            Navigation.PushModalAsync(new UserDetails());
         }
 
         public AllUsers()
