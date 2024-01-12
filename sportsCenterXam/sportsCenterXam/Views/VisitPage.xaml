@@ -3,22 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="sportsCenterXam.Views.ActivityPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="20">
+
+            <Label Text="Welcome to Xamarin.Forms!" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
 
             <Label Text="Visit Date" />
             <DatePicker x:Name="visitDate" />
-            
+
             <Label Text="Activity" />
-            <Picker x:Name="activities" Title="Activity" />
-            
+            <Picker x:Name="activities" Title="Activity">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <!-- Add your activity options here -->
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
             <Label Text="Users" />
-            <Picker x:Name="users" Title="Select User" />
-            
-            <Button Text="Save" x:Name="Save" Clicked="Save_Clicked" />
+            <Picker x:Name="users" Title="Select User" ItemDisplayBinding="{Binding FullName}" />
+
+            <Button Text="Save" x:Name="Save" Clicked="Save_Clicked" BackgroundColor="#2196F3" TextColor="White"/>
+
         </StackLayout>
+ 
+        
 
     </ContentPage.Content>
 </ContentPage>
+    

@@ -20,41 +20,50 @@ namespace sportsCenterXam.Views
         ObservableCollection<User> users = new ObservableCollection<User>();
         public ICommand DetailsCommand => new Command<User>(OnDetails);
         public ICommand DeleteCommand => new Command<User>(OnDelete);
+        private readonly UserService userService = new UserService();
+
 
         private async void OnDelete(User user)
         {
             var userService = new UserService();
             await userService.DeleteUserAsync(user);
-            usersList.ItemsSource = await GetUsers();
+            cvUsers.ItemsSource = await GetUsers();
+            await DisplayAlert("Success", "User deleted", "OK");
         }
 
-        private void OnDetails(User user)
+        private async void OnDetails(User user)
         {
             App.UserViewModel.SelectedUser = user;
             var visitService = new VisitService();
             App.UserViewModel.Visits = visitService.GetVisitsByUserId(user.UserCode);
-            Navigation.PushModalAsync(new UserDetails());
+            await Navigation.PushModalAsync(new UserDetails());
         }
 
         public AllUsers()
         {
             InitializeComponent();
-            GetUsers().ContinueWith(t =>
-            {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    //add users to the observable collection
-                    foreach (var user in t.Result)
-                    {
-                        users.Add(user);
-                    }
-                });
-                usersList.ItemsSource = users;
-            });
+            InitializeDataSource();
+            BindingContext = this;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            InitializeDataSource();
+        }
+
+        /// <summary>
+        /// Initializes the data source for the users.
+        /// </summary>
+        private void InitializeDataSource()
+        {
+            var updatedUsers = userService.GetUsersAsync().Result;
+            users = new ObservableCollection<User>(updatedUsers);
+            cvUsers.ItemsSource = users;
         }
         private async Task<List<User>> GetUsers()
         {
-            var userService = new UserService();
+            
             return await userService.GetUsersAsync();
         }
     }

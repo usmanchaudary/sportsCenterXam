@@ -18,11 +18,11 @@ namespace sportsCenterXam.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ActivityPage : ContentPage
     {
-        public static List<string> activityEnums = typeof(ActivityEnum).GetProperties().Select(x => x.Name).ToList();
+        public static List<string> activityEnums = typeof(ActivityEnum).GetFields().Select(x => x.Name).ToList();
         public ActivityPage()
         {
             InitializeComponent();
-            activities.ItemsSource = new List<User>();
+            activities.ItemsSource = activityEnums;
             users.ItemsSource = GetUsers().Result.ToList();
         }
         private async Task<List<User>> GetUsers()
@@ -32,7 +32,7 @@ namespace sportsCenterXam.Views
             return users;
         }
 
-        private void Save_Clicked(object sender, EventArgs e)
+        private async void Save_Clicked(object sender, EventArgs e)
         {
             //if user is not selected then show alert
             if (users.SelectedItem == null)
@@ -61,7 +61,7 @@ namespace sportsCenterXam.Views
                 ActivityDate = visitDate.Date
             };
             visitRepository.AddVisit(visit);
-            DisplayAlert("Success", "Visit added", "OK");
+            await DisplayAlert("Success", "Visit added", "OK");
             //navigate to main page
             Navigation.PushModalAsync(new MainPage());
         }

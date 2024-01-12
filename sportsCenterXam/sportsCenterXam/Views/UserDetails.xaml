@@ -3,12 +3,94 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="sportsCenterXam.Views.UserDetails"
              xmlns:viewModels="clr-namespace:sportCenter.ViewModel;assembly=sportsCenterXam"
+             xmlns:models="clr-namespace:sportsCenter.Models;assembly=sportsCenterXam"
              x:DataType="viewModels:UserViewModel">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="User Details"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        
+       
+
+        <StackLayout Padding="16" VerticalOptions="CenterAndExpand">
+
+            <StackLayout Orientation="Horizontal"  Spacing="20">
+                <Label Text="Full Name:" VerticalOptions="Center" FontSize="Title" />
+                <Label x:Name="name" Text="{Binding SelectedUser.FullName}" VerticalOptions="CenterAndExpand" FontSize="Large" />
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal"  Spacing="20">
+                <Label Text="Date of Birth:" VerticalOptions="Center" FontSize="Title" />
+                <Label Text="{Binding SelectedUser.DateOfBirth, StringFormat='{0:MM/dd/yyyy}'}" VerticalOptions="CenterAndExpand" FontSize="Large" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal"  Spacing="60">
+                <Label Text="Gender:" VerticalOptions="Center" FontSize="Title" />
+                <Label Text="{Binding SelectedUser.Gender}" VerticalOptions="CenterAndExpand" FontSize="Large" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal"  Spacing="20">
+                <Label Text="Is Member:" VerticalOptions="Center" FontSize="Title" />
+                <CheckBox x:Name="chkIsMember" IsChecked="{Binding SelectedUser.IsMember}" ClassId="{Binding SelectedUser.UserCode}" VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+
+
+            <CollectionView 
+      VerticalOptions="Fill"
+      ItemsSource="{Binding Visits}"
+      SelectionMode="None"
+x:Name="userVisits"
+Grid.Row="1">
+                <CollectionView.Header>
+
+                    <Grid Padding="40">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="All Users"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   Grid.Column="0"
+               VerticalTextAlignment="Center"
+               />
+
+                        <Label Text="Last Name"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   Grid.Column="1"
+                   VerticalTextAlignment="Center"
+                   />
+  
+                    </Grid>
+
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Visit">
+
+                        <Grid Padding="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Label Text="{Binding ActivityDate}"
+                       HorizontalOptions="Fill" VerticalTextAlignment="Center" Grid.Column="0"/>
+                            
+                            <Label Text="{Binding ActivityEnum}"
+                       HorizontalOptions="Fill" VerticalTextAlignment="Center" Grid.Column="1"/>
+                            
+                        </Grid>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Spacer to push the button to the bottom -->
+            <BoxView HeightRequest="0" />
+
+            <Button Text="Update Membership" Clicked="UpdateMembership_Click" Margin="0, 16, 0, 0" VerticalOptions="EndAndExpand" FontSize="Large" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

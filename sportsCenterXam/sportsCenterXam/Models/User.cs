@@ -10,10 +10,6 @@ namespace sportCenter.Models
 {
     public class User
     {
-        public User()
-        {
-            this.UserCode = Guid.NewGuid();
-        }
 
         [PrimaryKey]
         public Guid UserCode { get; set; }

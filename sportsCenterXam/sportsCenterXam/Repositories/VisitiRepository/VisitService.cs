@@ -2,13 +2,17 @@
 using sportsCenterXam.Repositories.SharedRepository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace sportsCenterXam.Repositories.VisitiRepository
 {
     public class VisitService : ContextInitializer
     {
-
+        public VisitService()
+        {
+            _ = Init();
+        }
         public void AddVisit(Visit visit)
         {
             Database.Insert(visit);
@@ -38,7 +42,12 @@ namespace sportsCenterXam.Repositories.VisitiRepository
         //get all the visits of user by userId
         public List<Visit> GetVisitsByUserId(Guid userId)
         {
-            return Database.Table<Visit>().Where(v => v.UserId == userId).ToList();
+            if (Database.Table<Visit>().Any())
+            {
+                var visits = Database.Table<Visit>().Where(v => v.UserId == userId).ToList();
+                return visits;
+            }
+            return Enumerable.Empty<Visit>().ToList();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:sportCenter.Models"
              x:Class="sportsCenterXam.Views.AllUsers">
     <ContentPage.Content>
         <StackLayout>
@@ -8,39 +9,79 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
-            <ListView ItemsSource="{Binding users}" x:Name="usersList" HasUnevenRows="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid>
+            <CollectionView 
+             VerticalOptions="Fill"
+             ItemsSource="{Binding users}"
+             SelectionMode="None"
+       x:Name="cvUsers"
+       Grid.Row="1">
+                <CollectionView.Header>
+
+                    <Grid Padding="40">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="All Users"
+                          FontSize="Large"
+                          FontAttributes="Bold"
+                          Grid.Column="0"
+                      VerticalTextAlignment="Center"
+                      />
+
+                        <Label Text="Last Name"
+                          FontSize="Large"
+                          FontAttributes="Bold"
+                          Grid.Column="1"
+                          VerticalTextAlignment="Center"
+                          />
+
+                        <Label Text="Is Member"
+                          FontSize="Large"
+                          FontAttributes="Bold"
+                          Grid.Column="2"/>
+                    </Grid>
+
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:User">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <!-- Define the "Update" action -->
+                                <SwipeItems>
+                                    <SwipeItem Text="Details" BackgroundColor="GreenYellow" IconImageSource="update_icon.png" 
+                                      Command="{Binding Source={x:Reference cvUsers}, Path=BindingContext.DetailsCommand}" CommandParameter="{Binding .}" />
+                                    
+                                    <SwipeItem Text="Delete" BackgroundColor="Red" IconImageSource="update_icon.png" 
+                                      Command="{Binding Source={x:Reference cvUsers}, Path=BindingContext.DeleteCommand}" CommandParameter="{Binding .}" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Grid Padding="20">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+
                                 </Grid.ColumnDefinitions>
-
-                                <Label Text="{Binding FirstName}" Grid.Column="0" />
-                                <Label Text="{Binding LastName}" Grid.Column="1" />
-
-                                <!-- Detail Icon Column -->
-                                <Image Source="details.svg" Grid.Column="2">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding DetailCommand}" CommandParameter="{Binding .}"  />
-                                    </Image.GestureRecognizers>
-                                </Image>
-
-                                <!-- Delete Icon Column -->
-                                <Image Source="delete.svg" Grid.Column="3">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding DeleteCommand}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                <Label Text="{Binding FullName}"
+                              HorizontalOptions="Fill" VerticalTextAlignment="Center" Grid.Column="0"/>
+                                <Label Text="{Binding Gender}"
+                              HorizontalOptions="Fill" VerticalTextAlignment="Center" Grid.Column="1"/>
+                                <Label Text="✔️"
+                          HorizontalOptions="Fill"
+                              VerticalTextAlignment="Center"
+                              Grid.Column="2"
+                              IsVisible="{Binding IsMember}"/>
                             </Grid>
-                        </ViewCell>
+                        </SwipeView>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

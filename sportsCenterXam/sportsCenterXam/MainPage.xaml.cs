@@ -24,12 +24,12 @@ namespace sportsCenterXam
 
         private void CreateActivity_Clicked(object sender, EventArgs e)
         {
-
+            Navigation.PushModalAsync(new ActivityPage());
         }
 
         private void ShowUsersBtn_Clicked(object sender, EventArgs e)
         {
-
+            Navigation.PushModalAsync(new AllUsers());
         }
     }
 }
