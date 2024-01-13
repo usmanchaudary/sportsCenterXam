@@ -22,6 +22,7 @@ namespace sportsCenterXam.Views
         public ActivityPage()
         {
             InitializeComponent();
+            activityEnums.RemoveAt(0);
             activities.ItemsSource = activityEnums;
             users.ItemsSource = GetUsers().Result.ToList();
         }
@@ -68,7 +69,7 @@ namespace sportsCenterXam.Views
             visitRepository.AddVisit(visit);
             await DisplayAlert("Success", "Visit added", "OK");
             //navigate to main page
-            await Navigation.PushModalAsync(new MainPage());
+            await Navigation.PopModalAsync();
         }
     }
 }

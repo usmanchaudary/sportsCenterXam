@@ -75,6 +75,13 @@ namespace sportsCenterXam.Views
             await Navigation.PushModalAsync(new UserDetails());
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            InitializeDataSource();
+        }
+
+
         /// <summary>
         /// Initializes the data source for the users.
         /// </summary>
@@ -83,6 +90,8 @@ namespace sportsCenterXam.Views
             var updatedUsers = userService.GetUsersAsync().Result;
             users = new ObservableCollection<User>(updatedUsers);
             cvUsers.ItemsSource = users;
+            datePicker.Date = DateTime.Now;
+
         }
 
         /// <summary>
@@ -110,8 +119,9 @@ namespace sportsCenterXam.Views
             //get the users who have visited the center on the selected date
             var visits = visitService.GetVisits().Where(v => v.ActivityDate.Date == selectedDate.Date).ToList();
             //get the users who have visited the center on the selected date
-            var users = userService.GetUsersAsync().Result.Where(u => visits.Any(v => v.UserId == u.UserCode)).ToList();
+            var updatedUsers = userService.GetUsersAsync().Result.Where(u => visits.Any(v => v.UserId == u.UserCode)).ToList();
             //update the collection view
+            users = new ObservableCollection<User>(updatedUsers);
             cvUsers.ItemsSource = users;
         }
 
@@ -120,9 +130,10 @@ namespace sportsCenterXam.Views
         /// </summary>
         /// <param name="sender">The sender object.</param>
         /// <param name="e">The event arguments.</param>
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
-            cvUsers.ItemsSource = userService.GetUsersAsync().Result;
+            users = new ObservableCollection<User>(await userService.GetUsersAsync());
+            cvUsers.ItemsSource = users;
             datePicker.Date = DateTime.Now;
         }
     }
