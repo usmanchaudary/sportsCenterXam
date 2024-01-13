@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout Margin="20">
 
-            <Label Text="Welcome to Xamarin.Forms!" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Create new visit" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
 
             <Label Text="Visit Date" />
             <DatePicker x:Name="visitDate" />

@@ -21,12 +21,18 @@ namespace sportsCenterXam.Views
         public ICommand DetailsCommand => new Command<User>(OnDetails);
         public ICommand DeleteCommand => new Command<User>(OnDelete);
         private readonly UserService userService = new UserService();
-
+        private readonly VisitService visitService = new VisitService();
 
         private async void OnDelete(User user)
         {
-            var userService = new UserService();
+            var visits = visitService.GetVisitsByUserId(user.UserCode);
+            //delete all visits of the user
+            foreach (var visit in visits)
+            {
+                visitService.DeleteVisit(visit);
+            }
             await userService.DeleteUserAsync(user);
+
             cvUsers.ItemsSource = await GetUsers();
             await DisplayAlert("Success", "User deleted", "OK");
         }
@@ -49,6 +55,8 @@ namespace sportsCenterXam.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            //set the datepicker value to null
+
             InitializeDataSource();
         }
 
@@ -63,8 +71,24 @@ namespace sportsCenterXam.Views
         }
         private async Task<List<User>> GetUsers()
         {
-            
+
             return await userService.GetUsersAsync();
+        }
+
+        private async void datePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            //get the selected date
+            var selectedDate = datePicker.Date;
+            if (selectedDate != null)
+            {
+                cvUsers.ItemsSource = await userService.GetUsersAsync();
+            }
+            //get the users who have visited the center on the selected date
+            var visits = visitService.GetVisits().Where(v => v.ActivityDate.Date == selectedDate.Date).ToList();
+            //get the users who have visited the center on the selected date
+            var users = userService.GetUsersAsync().Result.Where(u => visits.Any(v => v.UserId == u.UserCode)).ToList();
+            //update the collection view
+            cvUsers.ItemsSource = users;
         }
     }
 }

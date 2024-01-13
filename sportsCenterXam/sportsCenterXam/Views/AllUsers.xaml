@@ -9,6 +9,9 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
+            <!--add a Date picker here-->
+            <DatePicker x:Name="datePicker" DateSelected="datePicker_DateSelected" />
+
             <CollectionView 
              VerticalOptions="Fill"
              ItemsSource="{Binding users}"
@@ -23,7 +26,7 @@
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
-                        <Label Text="All Users"
+                        <Label Text="First Name"
                           FontSize="Large"
                           FontAttributes="Bold"
                           Grid.Column="0"
@@ -66,9 +69,9 @@
                                     <ColumnDefinition Width="1*" />
 
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding FullName}"
+                                <Label Text="{Binding FirstName}"
                               HorizontalOptions="Fill" VerticalTextAlignment="Center" Grid.Column="0"/>
-                                <Label Text="{Binding Gender}"
+                                <Label Text="{Binding LastName}"
                               HorizontalOptions="Fill" VerticalTextAlignment="Center" Grid.Column="1"/>
                                 <Label Text="✔️"
                           HorizontalOptions="Fill"

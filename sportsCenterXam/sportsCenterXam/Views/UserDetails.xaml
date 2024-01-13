@@ -48,14 +48,14 @@ Grid.Row="1">
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
 
-                        <Label Text="All Users"
+                        <Label Text="Visit Date"
                    FontSize="Large"
                    FontAttributes="Bold"
                    Grid.Column="0"
                VerticalTextAlignment="Center"
                />
 
-                        <Label Text="Last Name"
+                        <Label Text="Activity Performed"
                    FontSize="Large"
                    FontAttributes="Bold"
                    Grid.Column="1"
@@ -74,9 +74,9 @@ Grid.Row="1">
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
-                            
-                            <Label Text="{Binding ActivityDate}"
-                       HorizontalOptions="Fill" VerticalTextAlignment="Center" Grid.Column="0"/>
+
+                            <Label Text="{Binding ActivityDate, StringFormat='{}{0:MM/dd/yyyy}'}"
+                       HorizontalOptions="Fill" VerticalTextAlignment="Center" Grid.Column="0" />
                             
                             <Label Text="{Binding ActivityEnum}"
                        HorizontalOptions="Fill" VerticalTextAlignment="Center" Grid.Column="1"/>
