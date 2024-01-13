@@ -9,7 +9,7 @@
         </Frame>
         <Image Source="dotnet_bot.jpg" Aspect="AspectFill"/>
 
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
+        <Label Text="Please Select From the options below" FontSize="Title" Padding="30,10,30,10"/>
         <!--add two buttons., one for navigating to the user registration page and other for creating new activity-->
         <Button Text="Register" x:Name="Register" Clicked="Register_Clicked" BackgroundColor="#2196F3" TextColor="White" FontSize="24" Padding="30,10,30,10"/>
         <Button Text="Create Activity" x:Name="CreateActivity" Clicked="CreateActivity_Clicked" BackgroundColor="#2196F3" TextColor="White" FontSize="24" Padding="30,10,30,10"/>

@@ -8,9 +8,17 @@
             <Label Text="All Users"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+            
+                <!-- DatePicker -->
+                <DatePicker x:Name="datePicker" DateSelected="datePicker_DateSelected" HorizontalOptions="Fill" />
 
-            <!--add a Date picker here-->
-            <DatePicker x:Name="datePicker" DateSelected="datePicker_DateSelected" />
+                <!-- Button -->
+                <Button Text="Reset Data" Clicked="Button_Clicked" />
+            </StackLayout>
+            
 
             <CollectionView 
              VerticalOptions="Fill"

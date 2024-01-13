@@ -90,5 +90,11 @@ namespace sportsCenterXam.Views
             //update the collection view
             cvUsers.ItemsSource = users;
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            cvUsers.ItemsSource = userService.GetUsersAsync().Result;
+            datePicker.Date = DateTime.Now;
+        }
     }
 }
