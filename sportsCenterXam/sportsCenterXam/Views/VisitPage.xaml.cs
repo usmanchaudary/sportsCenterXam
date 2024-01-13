@@ -32,24 +32,29 @@ namespace sportsCenterXam.Views
             return users;
         }
 
+        /// <summary>
+        /// Event handler for the Save button click.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         private async void Save_Clicked(object sender, EventArgs e)
         {
             //if user is not selected then show alert
             if (users.SelectedItem == null)
             {
-                DisplayAlert("Error", "Please select user", "OK");
+                await DisplayAlert("Error", "Please select user", "OK");
                 return;
             }
             //if date is not selected then show alert
             if (visitDate.Date == null)
             {
-                DisplayAlert("Error", "Please select date", "OK");
+                await DisplayAlert("Error", "Please select date", "OK");
                 return;
             }
             //if activity is not selected then show alert
             if (activities.SelectedItem == null)
             {
-                DisplayAlert("Error", "Please select activity", "OK");
+                await DisplayAlert("Error", "Please select activity", "OK");
                 return;
             }
             var visitRepository = new VisitService();
@@ -63,7 +68,7 @@ namespace sportsCenterXam.Views
             visitRepository.AddVisit(visit);
             await DisplayAlert("Success", "Visit added", "OK");
             //navigate to main page
-            Navigation.PushModalAsync(new MainPage());
+            await Navigation.PushModalAsync(new MainPage());
         }
     }
 }

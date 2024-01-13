@@ -9,10 +9,17 @@ using System.Threading.Tasks;
 
 namespace sportCenter.ViewModel
 {
+    /// <summary>
+    /// Represents the view model for the User entity.
+    /// </summary>
     public class UserViewModel : INotifyPropertyChanged
     {
         private User _selectedUser;
         private List<Visit> _userVisits;
+
+        /// <summary>
+        /// Gets or sets the selected user.
+        /// </summary>
         public User SelectedUser
         {
             get { return _selectedUser; }
@@ -25,6 +32,10 @@ namespace sportCenter.ViewModel
                 }
             }
         }
+
+        /// <summary>
+        /// Gets or sets the list of visits for the user.
+        /// </summary>
         public List<Visit> Visits
         {
             get { return _userVisits; }

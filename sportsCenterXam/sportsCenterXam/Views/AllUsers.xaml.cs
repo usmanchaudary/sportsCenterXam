@@ -13,16 +13,42 @@ using Xamarin.Forms.Xaml;
 
 namespace sportsCenterXam.Views
 {
+    /// <summary>
+    /// Represents the page that displays all users.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AllUsers : ContentPage
     {
         //create an observable collection of users
         ObservableCollection<User> users = new ObservableCollection<User>();
+
+        /// <summary>
+        /// Gets the command for displaying user details.
+        /// </summary>
         public ICommand DetailsCommand => new Command<User>(OnDetails);
+
+        /// <summary>
+        /// Gets the command for deleting a user.
+        /// </summary>
         public ICommand DeleteCommand => new Command<User>(OnDelete);
+
         private readonly UserService userService = new UserService();
         private readonly VisitService visitService = new VisitService();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AllUsers"/> class.
+        /// </summary>
+        public AllUsers()
+        {
+            InitializeComponent();
+            InitializeDataSource();
+            BindingContext = this;
+        }
+
+        /// <summary>
+        /// Handles the delete operation for a user.
+        /// </summary>
+        /// <param name="user">The user to be deleted.</param>
         private async void OnDelete(User user)
         {
             var visits = visitService.GetVisitsByUserId(user.UserCode);
@@ -37,27 +63,16 @@ namespace sportsCenterXam.Views
             await DisplayAlert("Success", "User deleted", "OK");
         }
 
+        /// <summary>
+        /// Handles the details operation for a user.
+        /// </summary>
+        /// <param name="user">The user to display details for.</param>
         private async void OnDetails(User user)
         {
             App.UserViewModel.SelectedUser = user;
             var visitService = new VisitService();
             App.UserViewModel.Visits = visitService.GetVisitsByUserId(user.UserCode);
             await Navigation.PushModalAsync(new UserDetails());
-        }
-
-        public AllUsers()
-        {
-            InitializeComponent();
-            InitializeDataSource();
-            BindingContext = this;
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            //set the datepicker value to null
-
-            InitializeDataSource();
         }
 
         /// <summary>
@@ -69,12 +84,21 @@ namespace sportsCenterXam.Views
             users = new ObservableCollection<User>(updatedUsers);
             cvUsers.ItemsSource = users;
         }
+
+        /// <summary>
+        /// Gets the list of users.
+        /// </summary>
+        /// <returns>The list of users.</returns>
         private async Task<List<User>> GetUsers()
         {
-
             return await userService.GetUsersAsync();
         }
 
+        /// <summary>
+        /// Handles the date selection in the date picker.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
         private async void datePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
             //get the selected date
@@ -91,6 +115,11 @@ namespace sportsCenterXam.Views
             cvUsers.ItemsSource = users;
         }
 
+        /// <summary>
+        /// Resets the data source.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
         private void Button_Clicked(object sender, EventArgs e)
         {
             cvUsers.ItemsSource = userService.GetUsersAsync().Result;

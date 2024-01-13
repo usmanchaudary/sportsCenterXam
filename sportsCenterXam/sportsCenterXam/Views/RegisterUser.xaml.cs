@@ -20,10 +20,16 @@ namespace sportsCenterXam.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Event handler for the RegisterUser button click.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         private async void RegisterUser_Clicked(object sender, EventArgs e)
         {
             var userService = new UserService();
             Enum.TryParse<UserGender>(userGender?.SelectedItem?.ToString(), out UserGender result);
+
             // Create a new User object with input values
             var user = new User
             {

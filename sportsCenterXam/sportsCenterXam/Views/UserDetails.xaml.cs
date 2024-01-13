@@ -12,10 +12,18 @@ using Xamarin.Forms.Xaml;
 
 namespace sportsCenterXam.Views
 {
+
+    /// <summary>
+    /// Represents the UserDetails page.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UserDetails : ContentPage
     {
         ObservableCollection<Visit> visits = new ObservableCollection<Visit>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserDetails"/> class.
+        /// </summary>
         public UserDetails()
         {
             InitializeComponent();
@@ -24,6 +32,11 @@ namespace sportsCenterXam.Views
             userVisits.ItemsSource = visits;
         }
 
+        /// <summary>
+        /// Event handler for updating the membership status of a user.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         private async void UpdateMembership_Click(object sender, EventArgs e)
         {
             // Get the chkIsMember value
