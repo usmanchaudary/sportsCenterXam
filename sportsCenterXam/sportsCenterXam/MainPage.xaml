@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="sportsCenterXam.MainPage">
 
-    <StackLayout>
+    <StackLayout Padding="20">
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            <Label Text="Welcome to Sports Center!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
+        <Image Source="dotnet_bot.jpg" Aspect="AspectFill"/>
+
         <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
         <!--add two buttons., one for navigating to the user registration page and other for creating new activity-->
         <Button Text="Register" x:Name="Register" Clicked="Register_Clicked" BackgroundColor="#2196F3" TextColor="White" FontSize="24" Padding="30,10,30,10"/>

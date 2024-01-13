@@ -139,4 +139,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\delete.svg" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\dotnet_bot.png" />
+  </ItemGroup>
 </Project>

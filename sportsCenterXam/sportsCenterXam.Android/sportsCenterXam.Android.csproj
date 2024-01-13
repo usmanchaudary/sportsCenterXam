@@ -84,7 +84,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\dotnet_bot.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sportsCenterXam\sportsCenterXam.csproj">
       <Project>{B52EB1BC-EDDD-4C16-8A42-17FE3A145FED}</Project>
